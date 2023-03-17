@@ -18,20 +18,17 @@ def main():
         model="gpt-3.5-turbo",
         messages = [
         {"role": "system", "content": "You are an AI language model that generates Python code."},
-        {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run"}],
-        temperature=1,
+        {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run"},
+        {"role": "user", "content": f"modify that to make the the code block work. Return ONLY the python code and don't explain it. Remove any text that is not part of the code itself"}]
     )
 
-    # Extract the generated Python code
     code = response.choices[0].message.content
     
     code = extract_code_from_markdown(code)
 
     name = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages = [
-        {"role": "user", "content": f"Come up with a name to accurately represent this program: {code}. Return ONLY the name and don't explain it. Remove any text that is not part of the name itself"}],
-        temperature=1,
+        messages = [{"role": "user", "content": f"Come up with a name to accurately represent this program: {code}. Return ONLY the name and don't explain it. Remove any text that is not part of the name itself"}]
     )
 
     name = name.choices[0].message.content.strip()
@@ -75,15 +72,14 @@ def download_and_save_libraries(libraries):
             print(f"Failed to install '{lib}': {e}")
 
 def extract_code_from_markdown(text):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages = [
-        {"role": "system", "content": "You are an AI language model that generates Python code."},
-        {"role": "user", "content": f"modify {text} to make the the code block work. Return ONLY the python code and don't explain it. Remove any text that is not part of the code itself"}],
-        temperature=1,
-    )
+#     response = openai.ChatCompletion.create(
+#         model="gpt-3.5-turbo",
+#         messages = [
+#         {"role": "system", "content": "You are an AI language model that generates Python code."},
+        
+#         temperature=1,
+#     )
     #remove markdown syntax from the response
-    text = response.choices[0].message.content
     text = re.sub(r'```python', '', text)
     text = re.sub(r'```', '', text)
 
