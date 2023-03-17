@@ -44,6 +44,11 @@ def main():
 
     print(f"\nGenerated program '{filename}' successfully created and made executable.")
 
+    run = input("Run the program? y/n ")
+
+    if run == "y":
+        os.system(f"./{filename}")
+
 
     
 
