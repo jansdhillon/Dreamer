@@ -1,5 +1,7 @@
 
-total = 0
-for i in range(1, 101):
-    total += i
-print(total)
+import string
+
+filename = "alphabet.txt"
+
+with open(filename, "w") as f:
+    f.write(string.ascii_lowercase)

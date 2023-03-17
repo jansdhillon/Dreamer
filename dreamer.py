@@ -27,27 +27,33 @@ def main():
     
     code = extract_code_from_markdown(code)
 
+    name = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages = [
+        {"role": "user", "content": f"Come up with a name to accurately represent this program: {code}. Return ONLY the name and don't explain it. Remove any text that is not part of the name itself"}],
+        temperature=1,
+    )
+
+    name = name.choices[0].message.content.strip()
+    print(name)
+
 
     # Create the Python file and write the generated code to it
-    filename = "generated_program.py"
+    filename = name + ".py"
     with open(filename, "w") as f:
         f.write(code)
-
-    # Make the file executable
-    st = os.stat(filename)
-    os.chmod(filename, st.st_mode | stat.S_IEXEC)
 
     # Download and save any required libraries
     required_libraries = extract_required_libraries(code)
     if required_libraries:
         download_and_save_libraries(required_libraries)
 
-    print(f"\nGenerated program '{filename}' successfully created and made executable.")
+    print(f"\nGenerated program '{filename}' successfully created.")
 
     run = input("Run the program? y/n ")
-
-    if run == "y":
-        os.system(f"./{filename}")
+    
+    if run.lower() == "y":
+        os.system(f"python {filename}")
 
 
     
@@ -73,7 +79,7 @@ def extract_code_from_markdown(text):
         model="gpt-3.5-turbo",
         messages = [
         {"role": "system", "content": "You are an AI language model that generates Python code."},
-        {"role": "user", "content": f"modify {text} to make the the code block work. Return ONLY the python code and don't explain it"}],
+        {"role": "user", "content": f"modify {text} to make the the code block work. Return ONLY the python code and don't explain it. Remove any text that is not part of the code itself"}],
         temperature=1,
     )
     #remove markdown syntax from the response
