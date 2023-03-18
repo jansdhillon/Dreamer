@@ -74,30 +74,38 @@ def get_input():
 
     # create entry
     label = tk.Label(root, text="What should the program do?")
-    label.pack()
+    label.grid(row=0, column=0)
     entry = tk.Text(root)
-    entry.pack()
+    entry.grid(row=1, column=0)
+
+    
 
     def get_answer():
         answer = entry.get("1.0", tk.END)
         program = write_program(answer)
-        # Create frame in the center of the screen
+        label.destroy()
+        entry.destroy()
+        submit.destroy()
+        success = tk.Label(root, text=f"{program} successfully created.")
+        success.grid(row=1, column=0)
+        
         ask_to_run_frame = tk.Frame(root)
         ask_to_run = tk.Label(ask_to_run_frame, text="Would you like to run the program?")
 
-        ask_to_run.pack()
-        ask_to_run_frame.pack(expand=True, anchor=tk.CENTER)  # Center the frame
+        ask_to_run.grid(row=0, column=0, columnspan=2)
+        ask_to_run_frame.grid(row=2, column=0)
 
         def yes():
             os.system(f"python3 generated_programs/{program}")
             # Open file
             open_file(f"generated_programs/{program}")
             root.destroy()
-
+        
         yes_button = tk.Button(ask_to_run_frame, text="Yes", command=yes)
-        yes_button.pack(side=tk.LEFT)
+        yes_button.grid(row=1, column=0)
         no_button = tk.Button(ask_to_run_frame, text="No", command=root.destroy)
-        no_button.pack(side=tk.LEFT)
+        no_button.grid(row=1, column=1)
+        
 
         def open_file(file_path):
             system = platform.system()
@@ -107,10 +115,11 @@ def get_input():
             elif system == "Darwin":
                 subprocess.Popen(["open", file_path])
         
+        # create button
+    submit = tk.Button(root, text="Submit", command=get_answer)
+    submit.grid(row=2, column=0)
 
-    # create button
-    button = tk.Button(root, text="Submit", command=get_answer)
-    button.pack()
+    
 
     # run gui
     root.mainloop()
@@ -129,6 +138,7 @@ def main():
 
     except Exception as e:
         print(f"Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
