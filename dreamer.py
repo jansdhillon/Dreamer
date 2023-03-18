@@ -117,14 +117,18 @@ def get_input():
 
 
 def main():
-    # Create a folder to store the generated programs
-    path = os.path.dirname(os.path.realpath(sys.argv[0]))
-    os.makedirs(path+"/generated_programs", exist_ok=True)
-    path = path+"/generated_programs"
 
-    # Ask the user for the program's purpose
-    get_input()
+    try:
+        # Create a folder to store the generated programs
+        path = os.path.dirname(os.path.realpath(sys.argv[0]))
+        os.makedirs(path+"/generated_programs", exist_ok=True)
+        path = path+"/generated_programs"
 
+        # Ask the user for the program's purpose
+        get_input()
+
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
