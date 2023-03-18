@@ -36,7 +36,8 @@ def write_program(prompt):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI language model that generates Python code."},
-            {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run. Return ONLY the python code and don't explain it. Ensure your response is valid Python code. Remove any text that is not part of the code itself and do not put it in quotes. Assume API keys are already stored as environment variables and access them using getenv."},]
+            {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run. Return ONLY the python code and don't explain it or apologize. Ensure your entire response is valid Python code. Remove any text that is not part of the code itself and do not put it in quotes. Assume API keys are already stored as environment variables and access them using getenv."},],
+            temperature=1
     )
 
     raw_code = response.choices[0].message.content
@@ -45,7 +46,8 @@ def write_program(prompt):
 
     response2 = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": f"Come up with a name to accurately represent this program: {code}. Return ONLY the name and don't explain it. Do not put it in quotes. Separate words with spaces following Python standards."}]
+        messages=[{"role": "user", "content": f"Come up with a name to accurately represent this program: {code}. Return ONLY the name and don't explain it. Do not put it in quotes. Separate words with underscores and only user lowercase letters."}],
+        temperature=1
     )
 
     raw_name = response2.choices[0].message.content
@@ -75,7 +77,7 @@ def get_input():
     # create entry
     label = tk.Label(root, text="What should the program do?")
     label.grid(row=0, column=0)
-    entry = tk.Text(root)
+    entry = tk.Text(root, height=10, width=70)
     entry.grid(row=1, column=0)
 
     
@@ -100,10 +102,14 @@ def get_input():
             # Open file
             open_file(f"generated_programs/{program}")
             root.destroy()
+
+        def no():
+            open_file(f"generated_programs/{program}")
+            root.destroy()
         
         yes_button = tk.Button(ask_to_run_frame, text="Yes", command=yes)
         yes_button.grid(row=1, column=0)
-        no_button = tk.Button(ask_to_run_frame, text="No", command=root.destroy)
+        no_button = tk.Button(ask_to_run_frame, text="No", command=no)
         no_button.grid(row=1, column=1)
         
 
