@@ -5,6 +5,8 @@ Asks you what you want the Python program to do and uses OpenAI's GPT 3.5 Turbo 
 ## NOTE: You must set your OpenAI API Key
 
     export OPENAI_API_KEY="YOUR_API_KEY"
+    #run this to check if it is set
+    echo $OPENAI_API_KEY
 
 
 ## INSTALL
