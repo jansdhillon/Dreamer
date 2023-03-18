@@ -1,6 +1,6 @@
 # Dreamer.py
 
-Asks you what you want the Python program to do and uses OpenAI's GPT 3.5 Turbo engine to create a Python script for it and give the user the option to automatically run it. Also installs required libraries and automatic naming (following Python Standards). 
+Asks you what you want the Python program to do and uses OpenAI's GPT 3.5 Turbo engine to create a Python script for it and give the user the option to automatically run it. Also installs required libraries and automatic naming (following Python standards). 
 
 ## NOTE: You must set your OpenAI API Key
 
