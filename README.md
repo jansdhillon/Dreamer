@@ -24,4 +24,4 @@ Finally,
     python3 Dreamer.py
 
 
-After generating the program, it will give you the option to automatically run it. Only do this if the the generated program wouldn't need additional files (ie. images) otherwise it'll just crash. It is then stored in the /generated_programs and opened (appropraite to OS). 
+After generating the program, it will give you the option to automatically run it. Only do this if the the generated program wouldn't need additional files (ie. images) otherwise it'll just crash. It is then stored in the /generated_programs folder and opened (appropriate to OS). 
