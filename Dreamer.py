@@ -36,7 +36,7 @@ def write_program(prompt):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI language model that generates Python code."},
-            {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run. Return ONLY the python code and don't explain it or apologize. Ensure your entire response is valid Python code and do not put it in quotes. Assume API keys are already stored as environment variables and access them using getenv IF NEEDED. Take the fastest approach possible and avoid reliance on other files when possible."},],
+            {"role": "user", "content": f"Create a Python script to {prompt}. Only generate the code needed for the program to run. Return ONLY the python code and don't explain it or apologize. Ensure your entire response is valid Python code and do not put it in quotes. If the program REQUIRES(!) the use of an API key, assume it is stored as an environment variable and access it with getenv. Otherwise do not try accessing an API Key. Take the fastest approach possible."},],
             temperature=1
     )
 
