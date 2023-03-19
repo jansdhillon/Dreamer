@@ -9,7 +9,7 @@ The program is then stored in the /generated_programs folder and opened (appropr
 
 # LIMITATIONS
 
-You should only really say 'yes' to automatically run the program if the the generated program wouldn't need additional files (ie. images) otherwise it'll often just crash. Due to the nature of the model, it might try and use links to files that are outdated or no longer exist, so you might need to fix that. I'm working on a fix for that...
+You should only really say 'yes' to automatically run the program if the the generated program wouldn't need additional files (ie. images) otherwise it'll often just crash. Due to the nature of the model, it might try and use links to files that are outdated or no longer exist, so you might need to fix that. If you have a link in mind already it may be handy to paste it into the prompt
 
 ## NOTE: You must set your OpenAI API Key
 In Terminal, 
