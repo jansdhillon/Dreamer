@@ -37,7 +37,7 @@ def write_program(prompt):
         messages=[
             {"role": "system", "content": "You can only communicate through valid Python code."},
             {"role": "user", "content": f"Create a Python script to {prompt}. Generate the code the program needs to run. If the program REQUIRES the use of an API key, assume it is stored as an environment variable and access it with getenv. Otherwise do not try accessing an API Key. Take the fastest approach possible. Return ONLY the python code and don't explain it or apologize. Ensure your entire response is valid Python code and do not put it in quotes. Do NOT say 'Here's...' or give any explanation outside of the Python comments. Avoid reliance on external files if possible."},],
-            temperature=1
+            temperature=0.8
     )
 
     raw_code = response.choices[0].message.content
